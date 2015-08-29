@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  CoursePickMenuTVC.h
 //  CoursePIck
 //
 //  Created by Alex Cohen on 8/29/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface CoursePickMenuTVC : UITableViewController
 
 @end
-
