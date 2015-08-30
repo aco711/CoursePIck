@@ -9,22 +9,49 @@
 #import "CoursePickMenuTVC.h"
 #import "PureLayout/PureLayout.h"
 #import "ActionSheetPicker.h"
+#import "CourseCommunicator.h"
+#import "CourseCommunicatorDelagate.h"
 
-@interface CoursePickMenuTVC ()
+@interface CoursePickMenuTVC () <CourseCommunicatorDelagate>
+
+
+@property (strong, nonatomic) CourseCommunicator * courseCommunicator;
+
 
 
 @end
 
+const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
+
 @implementation CoursePickMenuTVC
+
 
 -(void)loadView
 {
     self.tableView = [[UITableView alloc] init];
-   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Menu Cell"];
-
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Menu Cell"];
+    self.courseCommunicator = [[CourseCommunicator alloc]init];
+    self.courseCommunicator.delegate = self;
+    [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:@"fall" Subject:@"SPANISH"]];
+    //NSLog(@"%@",self.courseCommunicator.test);
     
 }
 
+-(NSString*)createURLToBeginSearchWithTerm:(NSString*)term Subject:(NSString*)subject
+{
+    if ([term isEqualToString:@"fall"])
+    {
+        term = @"4600";
+    }
+    NSString* url = [NSString stringWithFormat:@"http://api.asg.northwestern.edu/courses/?key=%@&term=%@&subject=%@",APIKEY, term, subject];
+    
+    return url;
+}
+
+-(void)recievedJSONCourseData:(NSDictionary *)dict
+{
+    // NSLog(@"%@", dict);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,22 +73,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0)
-    {
-        return 2;
-    }
-    else if (section == 1)
-    {
-        return 1;
-    }
-    else{
-        return 2;
-    }
+    
+    return 2;
 }
 
 
@@ -73,15 +91,7 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Quarter", @"Category"];
-        cell.textLabel.text = titles[indexPath.row];
-    } else if (indexPath.section == 1) {
-
-        cell.textLabel.text = @"Class";
-    }
-    else
-    {
-        NSArray *titles = @[@"Days", @"Time"];
+        NSArray *titles = @[@"Term", @"Subject"];
         cell.textLabel.text = titles[indexPath.row];
     }
     
@@ -90,20 +100,41 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *colors = [NSArray arrayWithObjects:@"Red", @"Green", @"Blue", @"Orange", nil];
+    NSArray *colors = [NSArray arrayWithObjects:@"Fall", @"Winter", @"Spring", @"Summer", nil];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.textLabel.text isEqualToString:@"Term"])
+    {
+        [ActionSheetStringPicker showPickerWithTitle:@"Select a Term"
+                                                rows:colors
+                                    initialSelection:0
+                                           doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                               UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                                               cell.textLabel.text = (NSString*)selectedValue;
+                                               
+                                           }
+                                         cancelBlock:^(ActionSheetStringPicker *picker) {
+                                             NSLog(@"Block Picker Canceled");
+                                         }
+                                              origin:self.view];
+    }
+    else if ([cell.textLabel.text isEqualToString:@"Subject"])
+    {
+        [ActionSheetStringPicker showPickerWithTitle:@"Select a Subject"
+                                                rows:colors
+                                    initialSelection:0
+                                           doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                               UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                                               cell.textLabel.text = (NSString*)selectedValue;
+                                               [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                                           }
+                                         cancelBlock:^(ActionSheetStringPicker *picker) {
+                                             NSLog(@"Block Picker Canceled");
+                                         }
+                                              origin:self.view];
+    }
     
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Color"
-                                            rows:colors
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                                           cell.textLabel.text = (NSString*)selectedValue;
-                                           [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         NSLog(@"Block Picker Canceled");
-                                     }
-                                          origin:self.view];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
 }

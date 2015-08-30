@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6CDB453C-F6CF-4573-9158-7C4CA30A071D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CoursePIck</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EAA59CE1630BFBC44BB96153E4D0FB291C8259B8</key>
+		<string>https://github.com/aco711/CoursePIck.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CoursePIck.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EAA59CE1630BFBC44BB96153E4D0FB291C8259B8</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aco711/CoursePIck.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EAA59CE1630BFBC44BB96153E4D0FB291C8259B8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EAA59CE1630BFBC44BB96153E4D0FB291C8259B8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CoursePIck</string>
+		</dict>
+	</array>
+</dict>
+</plist>
