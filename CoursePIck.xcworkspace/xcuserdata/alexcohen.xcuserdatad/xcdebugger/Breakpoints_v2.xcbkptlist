@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoursePIck/CoursePickMenuTVC.m"
-            timestampString = "462659238.839219"
+            timestampString = "462724649.613375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoursePIck/CourseCommunicator.m"
-            timestampString = "462658930.785473"
+            timestampString = "462675675.515095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49">
+            startingLineNumber = "52"
+            endingLineNumber = "52">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoursePIck/CoursePickMenuTVC.m"
-            timestampString = "462658930.785473"
+            timestampString = "462724649.613375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoursePIck/CoursePickMenuTVC.m"
-            timestampString = "462658930.785473"
+            timestampString = "462724649.613375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -71,13 +71,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "CoursePIck/AddToCalenderTVC.m"
+            timestampString = "462673658.989202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "CoursePIck/CoursePickMenuTVC.m"
-            timestampString = "462659238.839219"
+            timestampString = "462724790.93738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-recievedJSONCourseData:"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-createArrayOfAvailableSubjectStrings"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -87,29 +103,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoursePIck/CourseCommunicator.m"
-            timestampString = "462658923.346544"
+            filePath = "CoursePIck/CoursePickMenuTVC.m"
+            timestampString = "462724671.064381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-retrieveJSONDataFromURL:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CoursePIck/CourseCommunicator.m"
-            timestampString = "462658925.494728"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "-retrieveJSONDataFromURL:"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-recievedAvailableCourses:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

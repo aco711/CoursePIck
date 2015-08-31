@@ -11,12 +11,19 @@
 #import "ActionSheetPicker.h"
 #import "CourseCommunicator.h"
 #import "CourseCommunicatorDelagate.h"
+#import "AddToCalenderTVC.h"
+#import "CourseManagerDelegate.h"
+#import "CourseManager.h"
 
-@interface CoursePickMenuTVC () <CourseCommunicatorDelagate>
+@interface CoursePickMenuTVC () <CourseCommunicatorDelagate, CourseManagerDelegate>
 
 
 @property (strong, nonatomic) CourseCommunicator * courseCommunicator;
-
+@property (strong, nonatomic) CourseManager * courseManager;
+@property (strong, nonatomic) UIButton* findCoursesButton;
+@property (strong, nonatomic) NSString* term;
+@property (strong, nonatomic) NSString* subject;
+@property (strong, nonatomic) NSArray* availableSubjects; // of NSDictionary
 
 
 @end
@@ -25,14 +32,15 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
 
 @implementation CoursePickMenuTVC
 
-
 -(void)loadView
 {
     self.tableView = [[UITableView alloc] init];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Menu Cell"];
+    self.courseManager = [[CourseManager alloc] init];
+    self.courseManager.delegate = self;
     self.courseCommunicator = [[CourseCommunicator alloc]init];
     self.courseCommunicator.delegate = self;
-    [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:@"fall" Subject:@"SPANISH"]];
+    [self makeFindCoursesButton];
     //NSLog(@"%@",self.courseCommunicator.test);
     
 }
@@ -48,38 +56,41 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     return url;
 }
 
--(void)recievedJSONCourseData:(NSDictionary *)dict
+-(void)recievedJSONCourseData:(id)dict
 {
-    // NSLog(@"%@", dict);
+    
+    [self presentAvailableCoursesWithData:dict];
+     //NSLog(@"%@", dict);
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(void)recievedAvailableCourses:(NSArray *)availableSubjects
+{
+    self.availableSubjects = availableSubjects;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+-(NSArray*)availableSubjects
+{
+    if (!_availableSubjects)
+    {
+        _availableSubjects = [[NSArray alloc] init];
+    }
+    return _availableSubjects;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+    if (section == 0) {return 2;}
     
-    return 2;
+    return 0;
 }
 
 
@@ -100,16 +111,18 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *colors = [NSArray arrayWithObjects:@"Fall", @"Winter", @"Spring", @"Summer", nil];
+    NSArray *terms = [NSArray arrayWithObjects:@"Fall", @"Winter", @"Spring", @"Summer", nil];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.textLabel.text isEqualToString:@"Term"])
     {
         [ActionSheetStringPicker showPickerWithTitle:@"Select a Term"
-                                                rows:colors
+                                                rows:terms
                                     initialSelection:0
                                            doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                                                UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
                                                cell.textLabel.text = (NSString*)selectedValue;
+                                               self.term = selectedValue;
+                                               [self.courseManager findTermIDsGivenTermString:selectedValue];
                                                
                                            }
                                          cancelBlock:^(ActionSheetStringPicker *picker) {
@@ -120,11 +133,12 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     else if ([cell.textLabel.text isEqualToString:@"Subject"])
     {
         [ActionSheetStringPicker showPickerWithTitle:@"Select a Subject"
-                                                rows:colors
+                                                rows:[self createArrayOfAvailableSubjectStrings]
                                     initialSelection:0
                                            doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                                                UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
                                                cell.textLabel.text = (NSString*)selectedValue;
+                                               self.subject = selectedValue;
                                                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                                            }
                                          cancelBlock:^(ActionSheetStringPicker *picker) {
@@ -138,7 +152,39 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     
     
 }
+-(NSMutableArray*)createArrayOfAvailableSubjectStrings
+{
+    NSMutableArray * availableCourses = [[NSMutableArray alloc] init];
+    for (NSDictionary* dict in self.availableSubjects)
+    {
+        [availableCourses addObject:[dict valueForKey:@"symbol"]];
+    }
+    return availableCourses;
+}
 
+-(void)presentAvailableCoursesWithData:(id)data
+{
+    AddToCalenderTVC* avTVC = [[AddToCalenderTVC alloc] init];
+    avTVC.availableCourses = data;
+    [avTVC setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self showDetailViewController:avTVC sender:self];
+}
+
+-(void)makeFindCoursesButton
+{
+    self.findCoursesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    self.findCoursesButton.backgroundColor = [UIColor blackColor];
+    //self.findCoursesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.findCoursesButton addTarget:self action:@selector(loadDataButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.findCoursesButton setTitle:@"Find Courses" forState:UIControlStateNormal];
+    self.tableView.tableFooterView = self.findCoursesButton;
+
+}
+-(void)loadDataButtonClicked
+{
+
+    [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:[self.term lowercaseString] Subject:self.subject]];
+}
 
 /*
  // Override to support conditional editing of the table view.

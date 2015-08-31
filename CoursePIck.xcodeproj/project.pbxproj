@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A0445B81B93A25300BDC8AE /* AddToCalenderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0445B71B93A25300BDC8AE /* AddToCalenderTVC.m */; };
 		2A4A77E11B926B100084DF6A /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4A77E01B926B100084DF6A /* Course.m */; };
+		2A587C711B9495FF007DCE7C /* CourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A587C701B9495FF007DCE7C /* CourseManager.m */; };
 		2A6B643B1B926F5A005415BF /* CourseCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B643A1B926F5A005415BF /* CourseCommunicator.m */; };
 		2A995B471B920EA40077057D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A995B461B920EA40077057D /* main.m */; };
 		2A995B4A1B920EA40077057D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A995B491B920EA40077057D /* AppDelegate.m */; };
@@ -37,6 +38,9 @@
 		2A0445B71B93A25300BDC8AE /* AddToCalenderTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToCalenderTVC.m; sourceTree = "<group>"; };
 		2A4A77DF1B926B100084DF6A /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		2A4A77E01B926B100084DF6A /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		2A587C6F1B9495FF007DCE7C /* CourseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseManager.h; sourceTree = "<group>"; };
+		2A587C701B9495FF007DCE7C /* CourseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseManager.m; sourceTree = "<group>"; };
+		2A587C721B949614007DCE7C /* CourseManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseManagerDelegate.h; sourceTree = "<group>"; };
 		2A6B64391B926F5A005415BF /* CourseCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCommunicator.h; sourceTree = "<group>"; };
 		2A6B643A1B926F5A005415BF /* CourseCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCommunicator.m; sourceTree = "<group>"; };
 		2A995B411B920EA40077057D /* CoursePIck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoursePIck.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +118,9 @@
 				2A6B64391B926F5A005415BF /* CourseCommunicator.h */,
 				2A6B643A1B926F5A005415BF /* CourseCommunicator.m */,
 				2AA5773F1B93622E0060A7FD /* CourseCommunicatorDelagate.h */,
+				2A587C6F1B9495FF007DCE7C /* CourseManager.h */,
+				2A587C701B9495FF007DCE7C /* CourseManager.m */,
+				2A587C721B949614007DCE7C /* CourseManagerDelegate.h */,
 				2A4A77E01B926B100084DF6A /* Course.m */,
 				2A995B4E1B920EA40077057D /* Main.storyboard */,
 				2A995B511B920EA40077057D /* Images.xcassets */,
@@ -310,6 +317,7 @@
 				2A6B643B1B926F5A005415BF /* CourseCommunicator.m in Sources */,
 				2A995B471B920EA40077057D /* main.m in Sources */,
 				2A0445B81B93A25300BDC8AE /* AddToCalenderTVC.m in Sources */,
+				2A587C711B9495FF007DCE7C /* CourseManager.m in Sources */,
 				2A4A77E11B926B100084DF6A /* Course.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

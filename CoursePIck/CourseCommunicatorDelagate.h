@@ -10,6 +10,6 @@
 
 @protocol CourseCommunicatorDelagate
 
-- (void)recievedJSONCourseData:(NSDictionary*)dict;
+- (void)recievedJSONCourseData:(id)dict;
 
 @end

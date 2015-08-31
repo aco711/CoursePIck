@@ -14,6 +14,12 @@
 
 @implementation AddToCalenderTVC
 
+-(void)loadView
+{
+    self.tableView = [[UITableView alloc] init];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Course Cell"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,26 +38,41 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.availableCourses count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Course Cell"];
     
     // Configure the cell...
+    NSDictionary* classData = self.availableCourses[indexPath.row];
+    NSString* subject = [classData valueForKey:@"subject"];
+    NSString* catalog_num = [classData valueForKey:@"catalog_num"];
+    NSString* classTitle = [classData valueForKey:@"title"];
+    NSString* meeting_days = [classData valueForKey:@"meeting_days"];
+    NSString* start_time = [classData valueForKey:@"start_time"];
+    NSString* end_time = [classData valueForKey:@"end_time"];
+    
+    
+    
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@: %@",subject, catalog_num, classTitle];
+    [cell.textLabel adjustsFontSizeToFitWidth];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@-%@",meeting_days, start_time, end_time];
+    
+    
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
