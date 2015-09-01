@@ -21,7 +21,7 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - PureLayout (3.0.0)
+  - PureLayout (3.0.1)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
@@ -31,6 +31,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 28a795c376f9d76850cb56eaf7dd5cf9a9088223
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  PureLayout: 270dfee2236f697ab1d5e2771c2e5c248495fa0d
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
 
 COCOAPODS: 0.38.2

@@ -10,30 +10,27 @@
 
 @interface AddToCalenderTVC ()
 
+@property (strong, nonatomic) UIBarButtonItem* cancelButton;
+
+
 @end
 
 @implementation AddToCalenderTVC
+
 
 -(void)loadView
 {
     self.tableView = [[UITableView alloc] init];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Course Cell"];
+    self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancelSelection)];
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(void)cancelSelection
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -65,6 +62,7 @@
     
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@: %@",subject, catalog_num, classTitle];
+    cell.textLabel.font = [cell.textLabel.font fontWithSize:15];
     [cell.textLabel adjustsFontSizeToFitWidth];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@-%@",meeting_days, start_time, end_time];
     

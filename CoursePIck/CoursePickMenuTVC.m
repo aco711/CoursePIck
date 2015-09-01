@@ -32,6 +32,8 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
 
 @implementation CoursePickMenuTVC
 
+#pragma mark - ViewController
+
 -(void)loadView
 {
     self.tableView = [[UITableView alloc] init];
@@ -45,6 +47,34 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     
 }
 
+-(NSArray*)availableSubjects
+{
+    if (!_availableSubjects)
+    {
+        _availableSubjects = [[NSArray alloc] init];
+    }
+    return _availableSubjects;
+}
+
+#pragma mark - CourseCommunicator Delegate
+
+-(void)recievedJSONCourseData:(id)dict
+{
+    
+    [self presentAvailableCoursesWithData:dict];
+    //NSLog(@"%@", dict);
+}
+
+#pragma mark - CourseManager Delegate
+
+-(void)recievedAvailableCourses:(NSArray *)availableSubjects
+{
+    self.availableSubjects = availableSubjects;
+}
+
+
+
+
 -(NSString*)createURLToBeginSearchWithTerm:(NSString*)term Subject:(NSString*)subject
 {
     if ([term isEqualToString:@"fall"])
@@ -56,28 +86,37 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     return url;
 }
 
--(void)recievedJSONCourseData:(id)dict
+#pragma mark - Navigation
+
+-(void)presentAvailableCoursesWithData:(id)data
+{
+    AddToCalenderTVC* avTVC = [[AddToCalenderTVC alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:avTVC];
+    avTVC.availableCourses = data;
+    [navController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self showDetailViewController:navController sender:self];
+}
+
+#pragma mark - Buttons
+
+-(void)loadDataButtonClicked
 {
     
-    [self presentAvailableCoursesWithData:dict];
-     //NSLog(@"%@", dict);
+    [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:[self.term lowercaseString] Subject:self.subject]];
 }
 
--(void)recievedAvailableCourses:(NSArray *)availableSubjects
+-(void)makeFindCoursesButton
 {
-    self.availableSubjects = availableSubjects;
+    self.findCoursesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    self.findCoursesButton.backgroundColor = [UIColor blackColor];
+    //self.findCoursesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.findCoursesButton addTarget:self action:@selector(loadDataButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.findCoursesButton setTitle:@"Find Courses" forState:UIControlStateNormal];
+    self.tableView.tableFooterView = self.findCoursesButton;
+    
 }
 
 
-
--(NSArray*)availableSubjects
-{
-    if (!_availableSubjects)
-    {
-        _availableSubjects = [[NSArray alloc] init];
-    }
-    return _availableSubjects;
-}
 
 #pragma mark - Table view data source
 
@@ -109,11 +148,12 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     return cell;
 }
 
+#pragma mark - UITableView Delegate
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *terms = [NSArray arrayWithObjects:@"Fall", @"Winter", @"Spring", @"Summer", nil];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell.textLabel.text isEqualToString:@"Term"])
+    NSArray *terms = [NSArray arrayWithObjects:@"Fall", nil];
+    if (indexPath.row == 0)
     {
         [ActionSheetStringPicker showPickerWithTitle:@"Select a Term"
                                                 rows:terms
@@ -130,28 +170,34 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
                                          }
                                               origin:self.view];
     }
-    else if ([cell.textLabel.text isEqualToString:@"Subject"])
+    else if (indexPath.row == 1)
     {
-        [ActionSheetStringPicker showPickerWithTitle:@"Select a Subject"
-                                                rows:[self createArrayOfAvailableSubjectStrings]
-                                    initialSelection:0
-                                           doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                               UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                                               cell.textLabel.text = (NSString*)selectedValue;
-                                               self.subject = selectedValue;
-                                               [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                                           }
-                                         cancelBlock:^(ActionSheetStringPicker *picker) {
-                                             NSLog(@"Block Picker Canceled");
-                                         }
-                                              origin:self.view];
+        if ([self.availableSubjects count] >0)
+        {
+            [ActionSheetStringPicker showPickerWithTitle:@"Select a Subject"
+                                                    rows:[self createArrayOfAvailableSubjectStrings]
+                                        initialSelection:0
+                                               doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                                   UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                                                   cell.textLabel.text = (NSString*)selectedValue;
+                                                   self.subject = selectedValue;
+                                                   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                                               }
+                                             cancelBlock:^(ActionSheetStringPicker *picker) {
+                                                 NSLog(@"Block Picker Canceled");
+                                             }
+                                                  origin:self.view];
+        }
     }
+    
     
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
 }
+
+#pragma mark - Helper Functions
 -(NSMutableArray*)createArrayOfAvailableSubjectStrings
 {
     NSMutableArray * availableCourses = [[NSMutableArray alloc] init];
@@ -162,29 +208,8 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
     return availableCourses;
 }
 
--(void)presentAvailableCoursesWithData:(id)data
-{
-    AddToCalenderTVC* avTVC = [[AddToCalenderTVC alloc] init];
-    avTVC.availableCourses = data;
-    [avTVC setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    [self showDetailViewController:avTVC sender:self];
-}
 
--(void)makeFindCoursesButton
-{
-    self.findCoursesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
-    self.findCoursesButton.backgroundColor = [UIColor blackColor];
-    //self.findCoursesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.findCoursesButton addTarget:self action:@selector(loadDataButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.findCoursesButton setTitle:@"Find Courses" forState:UIControlStateNormal];
-    self.tableView.tableFooterView = self.findCoursesButton;
 
-}
--(void)loadDataButtonClicked
-{
-
-    [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:[self.term lowercaseString] Subject:self.subject]];
-}
 
 /*
  // Override to support conditional editing of the table view.
@@ -220,14 +245,7 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
  }
  */
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+
 
 @end
