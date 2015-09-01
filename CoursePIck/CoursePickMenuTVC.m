@@ -101,7 +101,7 @@ const static NSString* APIKEY = @"hwlBH18ncBVs8sPz";
 
 -(void)loadDataButtonClicked
 {
-    
+    if (!self.term || !self.subject) {return;}
     [self.courseCommunicator retrieveJSONDataFromURL:[self createURLToBeginSearchWithTerm:[self.term lowercaseString] Subject:self.subject]];
 }
 

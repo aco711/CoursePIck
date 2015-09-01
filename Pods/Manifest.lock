@@ -21,16 +21,24 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - MSCollectionViewCalendarLayout (0.1.5)
   - PureLayout (3.0.1)
+  - Realm (0.95.0):
+    - Realm/Headers (= 0.95.0)
+  - Realm/Headers (0.95.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - AFNetworking (~> 2.0)
+  - MSCollectionViewCalendarLayout
   - PureLayout
+  - Realm
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 28a795c376f9d76850cb56eaf7dd5cf9a9088223
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+  Realm: bbb171b96728ea136ed5cd354dca2a3d6529923c
 
 COCOAPODS: 0.38.2

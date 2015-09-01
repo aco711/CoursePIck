@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A0445B81B93A25300BDC8AE /* AddToCalenderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0445B71B93A25300BDC8AE /* AddToCalenderTVC.m */; };
 		2A587C711B9495FF007DCE7C /* CourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A587C701B9495FF007DCE7C /* CourseManager.m */; };
+		2A66D9331B9537890046FA38 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A66D9321B9537890046FA38 /* Course.m */; };
 		2A6B643B1B926F5A005415BF /* CourseCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B643A1B926F5A005415BF /* CourseCommunicator.m */; };
 		2A995B471B920EA40077057D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A995B461B920EA40077057D /* main.m */; };
 		2A995B4A1B920EA40077057D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A995B491B920EA40077057D /* AppDelegate.m */; };
@@ -38,6 +39,8 @@
 		2A587C6F1B9495FF007DCE7C /* CourseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseManager.h; sourceTree = "<group>"; };
 		2A587C701B9495FF007DCE7C /* CourseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseManager.m; sourceTree = "<group>"; };
 		2A587C721B949614007DCE7C /* CourseManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseManagerDelegate.h; sourceTree = "<group>"; };
+		2A66D9311B9537890046FA38 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
+		2A66D9321B9537890046FA38 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		2A6B64391B926F5A005415BF /* CourseCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCommunicator.h; sourceTree = "<group>"; };
 		2A6B643A1B926F5A005415BF /* CourseCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCommunicator.m; sourceTree = "<group>"; };
 		2A995B411B920EA40077057D /* CoursePIck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoursePIck.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +108,8 @@
 		2A995B431B920EA40077057D /* CoursePIck */ = {
 			isa = PBXGroup;
 			children = (
+				2A66D9311B9537890046FA38 /* Course.h */,
+				2A66D9321B9537890046FA38 /* Course.m */,
 				2A995B4B1B920EA40077057D /* CoursePickViewController.h */,
 				2A995B4C1B920EA40077057D /* CoursePickViewController.m */,
 				2A995B6C1B9215FD0077057D /* CoursePickMenuTVC.h */,
@@ -309,6 +314,7 @@
 				2A995B6E1B9215FD0077057D /* CoursePickMenuTVC.m in Sources */,
 				2A995B4D1B920EA40077057D /* CoursePickViewController.m in Sources */,
 				2A995B4A1B920EA40077057D /* AppDelegate.m in Sources */,
+				2A66D9331B9537890046FA38 /* Course.m in Sources */,
 				2A6B643B1B926F5A005415BF /* CourseCommunicator.m in Sources */,
 				2A995B471B920EA40077057D /* main.m in Sources */,
 				2A0445B81B93A25300BDC8AE /* AddToCalenderTVC.m in Sources */,

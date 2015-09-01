@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MSCollectionViewCalendarLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,10 +29,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2AA865CBA356CD5B9DDEE94A2D9AA78F</key>
+		<key>0658E1063AE56660A474CBE7642A8D5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>574F4D0775F376BD899241ACA748F3C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5F449056D1A264EC89342C6441C5B974</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,12 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>97C7E1E35FBA611BA73C82E4EC6F324D</key>
+		<key>9E0BD521FC4DDB59D9AD5286E4FD0164</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABD6F315E31398D6998CF7AEF560446C</key>
+		<key>CDAF0244F523AEBC4A5F2FD0126C2DE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

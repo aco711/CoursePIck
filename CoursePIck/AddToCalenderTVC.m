@@ -57,6 +57,7 @@
     NSString* meeting_days = [classData valueForKey:@"meeting_days"];
     NSString* start_time = [classData valueForKey:@"start_time"];
     NSString* end_time = [classData valueForKey:@"end_time"];
+    NSString* instructor = [classData valueForKey:@"instructor"];
     
     
     
@@ -64,13 +65,20 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@: %@",subject, catalog_num, classTitle];
     cell.textLabel.font = [cell.textLabel.font fontWithSize:15];
     [cell.textLabel adjustsFontSizeToFitWidth];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@-%@",meeting_days, start_time, end_time];
+    if (![meeting_days isKindOfClass:[NSNull class]])
+    {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@-%@, %@",meeting_days, start_time, end_time, instructor];
+    }
     
     
     
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
